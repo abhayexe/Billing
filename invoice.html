@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Slip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .slip-container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .slip-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .slip-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .slip-content p {
+            margin: 5px 0;
+        }
+        .slip-content span {
+            font-weight: bold;
+        }
+        .slip-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+        .card {
+  width: 190px;
+  height: 90px;
+  background: #ffff;
+  box-shadow: 0 1px 25px rgba(0,0,0,0.2);
+  /* position: absolute; */
+  margin-top: 90px;
+  margin-left: 150px;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  padding: 12px 10px;
+}
+
+.card_load {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  float: left;
+  background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 
+  40%, #e5e5e5 48%);
+  border-radius: 50%;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  animation: load89234 2s infinite;
+}
+
+.card_load_extreme_title {
+  width: 90px;
+  height: 10px;
+  position: relative;
+  float: right;
+  border-radius: 5px;
+  background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 
+  40%, #e5e5e5 48%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  animation: load89234 2s infinite;
+}
+
+.card_load_extreme_descripion {
+  width: 90px;
+  height: 47px;
+  position: relative;
+  float: right;
+  border-radius: 5px;
+  background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 
+  40%, #e5e5e5 48%);
+  margin-top: 10px;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  animation: load89234 2s infinite;
+}
+
+@keyframes load89234 {
+  100% {
+    background-position: -100% 0;
+  }
+}
+    </style>
+</head>
+<body>
+    
+    <div class="slip-container">
+        <div class="slip-header">
+            <h1>Invoice Slip</h1>
+        </div>
+        <div class="card">
+            <div class="card_load"></div>
+            <div class="card_load_extreme_title"></div>
+            <div class="card_load_extreme_descripion"></div>
+        </div>
+        <div class="slip-content">
+            <p>Name: <span id="name">blank</span></p>
+            <p>Description: <span id="description">blank</span></p>
+            <p>Quantity: <span id="quantity">blank</span></p>
+            <p>Unit Price: <span id="unit-price">blank</span></p>
+            <p>Total: <span id="total">blank</span></p>
+        </div>
+        <div class="slip-footer">
+            <p>Thank you for your purchase!</p>
+        </div>
+    </div>
+
+    <script>
+        // Function to parse query parameters from the URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get('name') || 'blank',
+                description: params.get('description') || 'blank',
+                quantity: params.get('quantity') || 'blank',
+                unit_price: params.get('unit_price') || 'blank',
+                total: params.get('total') || 'blank'
+            };
+        }
+
+        // Extract the query parameters
+        const queryParams = getQueryParams();
+
+        // Update the HTML elements with the extracted information
+        document.getElementById('name').textContent = queryParams.name;
+        document.getElementById('description').textContent = queryParams.description;
+        document.getElementById('quantity').textContent = queryParams.quantity;
+        document.getElementById('unit-price').textContent = queryParams.unit_price;
+        document.getElementById('total').textContent = queryParams.total;
+    </script>
+</body>
+</html>

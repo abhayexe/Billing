@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    </style>
+    <title>Billing Website</title>
+    <style>
+        body {
+            font-family: 'Kanit',Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .billing-container {
+            background-color: #e3e3e3;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .billing-container h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        /* .form-group button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        } */
+        .qr-code img {
+            display: block;
+            margin: 0 auto;
+        }
+        button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+  background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+  border-radius: 30px;
+  border: 1px solid #8F9092;
+  transition: all 0.2s ease;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #606060;
+  text-shadow: 0 1px #fff;
+}
+
+button:hover {
+  box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+}
+
+button:active {
+  box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+}
+
+button:focus {
+  box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+}
+.caltot{
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+.caltot2{
+    margin-top: 10px;
+}
+.input {
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  padding: 1em;
+  background-color: #ccc;
+  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+  transition: 300ms ease-in-out;
+}
+
+.input:focus {
+  background-color: white;
+  transform: scale(1.05);
+  box-shadow: 13px 13px 100px #969696,
+             -13px -13px 100px #ffffff;
+}
+.heading{
+    color: rgb(0, 31, 115);
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="billing-container">
+        <h1 class="heading" >Billing Form</h1>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="input" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" class="input" placeholder="Enter the name of the item">
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" class="input" placeholder="Enter quantity">
+        </div>
+        <div class="form-group">
+            <label for="unit-price">Unit Price</label>
+            <input type="number" id="unit-price" class="input" placeholder="Enter unit price">
+        </div>
+        <div class="form-group">
+            <label for="total">Total</label>
+            <input type="number" id="total" class="input" placeholder="Total" readonly>
+        </div>
+        <div class="form-group">
+            <button class="caltot" onclick="calculateTotal()">Calculate Total</button>
+            <button onclick="printInvoice()">Print Invoice</button>
+            <button class="caltot2" onclick="openLink()">Payment</button>
+        </div>
+    </div>
+    <div class="qr-code">
+        <button onclick="generateQRCode()">Generate QR Code</button>
+        <img id="qr-code" src="" alt="" style="display:none; margin-top: 20px;">
+    </div>
+
+    <script>
+        function openLink() {
+            window.open('payment.html', "_blank");
+        }
+        function calculateTotal() {
+            const quantity = document.getElementById('quantity').value;
+            const unitPrice = document.getElementById('unit-price').value;
+            const total = quantity * unitPrice;
+            document.getElementById('total').value = total;
+        }
+
+        function printInvoice() {
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const quantity = document.getElementById('quantity').value;
+            const unitPrice = document.getElementById('unit-price').value;
+            const total = document.getElementById('total').value;
+            const url = `invoice.html?name=${encodeURIComponent(name)}&description=${encodeURIComponent(description)}&quantity=${quantity}&unit_price=${unitPrice}&total=${total}`;
+            window.open(url, '_blank');
+        }
+
+        function generateQRCode() {
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const quantity = document.getElementById('quantity').value;
+            const unitPrice = document.getElementById('unit-price').value;
+            const total = document.getElementById('total').value;
+            const data = `https://abhayexe.github.io/payment-slip/?name=${encodeURIComponent(name)}&description=${encodeURIComponent(description)}&quantity=${quantity}&unit_price=${unitPrice}&total=${total}`;
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(data)}`;
+            const qrCodeImage = document.getElementById('qr-code');
+            qrCodeImage.src = qrCodeUrl;
+            qrCodeImage.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
